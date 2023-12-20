@@ -33,10 +33,10 @@ app.get('/products', async (req, res) => {
 app.get('/products/:pid', async (req, res) => {
     try {
         let pid = req.params.pid;
-        const prod = await manager.getProductsById(pid);
+        const buscado = await manager.getProductsById(pid);
         const error = { Error: "Producto no encontrado" };
-        if (prod) {
-            res.send(prod)
+        if (buscado) {
+            res.send(buscado)
         } else {
             res.send({ error })
         }

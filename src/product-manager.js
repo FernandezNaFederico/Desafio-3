@@ -44,7 +44,7 @@ class ProductManager {
         console.log(this.products)
     }
 
-    async getPruductById(id) {
+    async getProductsById(id) {
         try {
             const arrayProducts = await this.readFile();
             const buscado = arrayProducts.find(item => item.id === id);
