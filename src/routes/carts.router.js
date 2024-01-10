@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const ProductManager = require("../controllers/product-manager.js");
-const productManager = new ProductManager("./src/models/carrito.json");
+const CartManager = require("../controllers/cartManager.js");
+const cartManager = new CartManager("./src/models/carrito.json");
 
 // POST 
 
 router.post('/', async (req, res) => {
-    const cart = await productManager.createCart();
+    const cart = await cartManager.createCart();
     res.json(cart);
 });
 
 // GET 
 router.get('/:cid', async (req, res) => {
     const cartId = parseInt(req.params.cid);
-    const cart = await productManager.getCartById(cartId);
+    const cart = await cartManager.getCartById(cartId);
     res.json(cart);
 });
 
@@ -24,7 +24,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
     const productId = parseInt(req.params.pid);
     const { quantity } = req.body;
 
-    const result = await productManager.addToCart(cartId, productId, quantity);
+    const result = await cartManager.addToCart(cartId, productId, quantity);
     res.json(result);
 });
 

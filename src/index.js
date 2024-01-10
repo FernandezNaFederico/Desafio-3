@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 const puerto = 8080;
 const productRouter = require("./routes/products.router.js");
 const cartsRouter = require("./routes/carts.router.js");
