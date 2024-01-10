@@ -11,9 +11,9 @@ class ProductManager {
     }
 
     async addProduct(nuevoOjeto) {
-        let {title, description, price, thumbnail,code, stock} = nuevoOjeto;
+        let {title, description, price, thumbnail,code, stock, category} = nuevoOjeto;
 
-        if(!title || !description || !price || !thumbnail || !code || !stock)
+        if(!title || !description || !price || !thumbnail || !code || !stock || !category)
         {
             console.log("Todos los campos son requeridos, compltalos o hasta la vista beibi");
             return;
@@ -32,6 +32,7 @@ class ProductManager {
             thumbnail,
             code,
             stock,
+            category,
         }
 
         this.products.push(newProduct);
