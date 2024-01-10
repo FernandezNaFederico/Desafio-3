@@ -118,6 +118,33 @@ class ProductManager {
             console.log("Error al actualizar el producto", error);
         }
     }
+
+    async addToCart(cartId, productId, quantity = 1) {
+        const cart = await this.getCartById(cartId);
+        if (cart.error) return cart;
+
+        const productIndex = cart.products.findIndex(p => p.id === productId);
+        if (productIndex > -1) {
+            cart.products[productIndex].quantity += quantity;
+        } else {
+            cart.products.push({ id: productId, quantity });
+        }
+
+        await this.saveCarts();
+        return cart;
+    }
+
+    async createCart() {
+        const cart = { id: this.nextCartId++, products: [] };
+        this.carts.push(cart);
+        await this.saveCarts();
+        return cart;
+    }
+
+    async getCartById(cartId) {
+        const cart = this.carts.find(cart => cart.id === cartId);
+        return cart || { error: 'Carrito no encontrado' };
+    }
 }
 
 module.exports = ProductManager;
