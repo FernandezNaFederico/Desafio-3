@@ -1,49 +1,18 @@
 const express = require("express");
-const ProductManager = require("./product-manager");
 const app = express();
 const puerto = 8080;
+const productRouter = require("./routes/products.router.js");
+const cartsRouter = require("./routes/carts.router.js");
 
-const manager = new ProductManager("./src/products.json");
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.use("/api", productRouter);
+app.use("/api/carts", cartsRouter);
 
 
 app.get('/', (req, res) => {
     res.send("Bienvenidos a mi primera experiencia con EXPRESS")
-})
-
-
-app.get('/products', async (req, res) => {
-    try {
-        const limit = parseInt(req.query.limit);
-        const allProds = await manager.readFile();
-
-
-        if (!isNaN(limit)) {
-            const limitedProducts = allProds.slice(0, limit);
-            res.send(limitedProducts);
-        } else {
-            res.send(allProds);
-        }
-
-    } catch (error) {
-        res.status(500).json({ error: "Error en el servidor" });
-    }
-});
-
-
-app.get('/products/:pid', async (req, res) => {
-    try {
-        let pid = req.params.pid;
-        const buscado = await manager.getProductsById(pid);
-        const error = { Error: "Producto no encontrado" };
-        if (buscado) {
-            res.send(buscado)
-        } else {
-            res.send({ error })
-        }
-
-    } catch (error) {
-        res.status(500).json({ msg: "Error en el servidor" });
-    }
 });
 
 
