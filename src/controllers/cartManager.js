@@ -36,7 +36,7 @@ class CartManager {
 
     async getCartById(cartId) {
         const cart = this.carts.find(cart => cart.id === cartId);
-        return cart || { error: 'Carrito no encontrado' };
+        return cart || { error: "Carrito no encontrado" };
     }
 
     async addToCart(cartId, productId, quantity = 1) {
@@ -44,7 +44,7 @@ class CartManager {
         if (cart.error) return cart;
 
         const productIndex = cart.products.findIndex(p => p.id === productId);
-        if (productIndex > -1) {
+        if (productIndex !== -1) {
             cart.products[productIndex].quantity += quantity;
         } else {
             cart.products.push({ id: productId, quantity });

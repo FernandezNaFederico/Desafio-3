@@ -1,11 +1,6 @@
 [
-    {
-    "id": "1",
-    "title": "Imperio AO",
-    "description": "elije tu clase de avatar y a la aventura",
-    "price": 3000,
-    "thumbnail": "sin imagen",
-    "code": "abc123",
-    "stock": 20
-}
+  {
+    "id": 1,
+    "products": []
+  }
 ]

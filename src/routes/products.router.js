@@ -6,17 +6,17 @@ const productManager = new ProductManager("./src/models/products.json");
 
 //GET
 
-router.get('/products', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const limit = parseInt(req.query.limit);
-        const allProds = await productManager.readFile();
+        const allProds = await productManager.getProducts();
 
 
         if (!isNaN(limit)) {
             const limitedProducts = allProds.slice(0, limit);
-            res.send(limitedProducts);
+            res.json(limitedProducts);
         } else {
-            res.send(allProds);
+            res.json(allProds);
         }
 
     } catch (error) {
@@ -27,11 +27,11 @@ router.get('/products', async (req, res) => {
 
 router.get('/products/:pid', async (req, res) => {
     try {
-        let pid = req.params.pid;
-        const buscado = await productManager.getProductsById(pid);
+        let pid = parseInt(req.params.pid);
+        const sought = await productManager.getProductsById(pid);
         const error = { Error: "Producto no encontrado" };
-        if (buscado) {
-            res.send(buscado)
+        if (sought) {
+            res.send(sought)
         } else {
             res.send({ error })
         }
@@ -43,28 +43,41 @@ router.get('/products/:pid', async (req, res) => {
 
 // POST
 router.post('/', async (req, res) => {
-    const { title, description, price,category, thumbnail, code, stock } = req.body;
-    await productManager.addProduct({ title, description,category, price, thumbnail, code, stock });
-    res.json({ message: "Videojuego agregado exitosamente" });
+    try {
+        const { title, description, price,category, thumbnail, code, stock } = req.body;
+        const response = await productManager.addProduct({ title, description,category, price, thumbnail, code, stock });
+        res.json(response);
+    } catch (error) {
+        console.log(error)
+        res.send(`Error al intentar agregar un producto`)
+    }
 });
 
   // PUT
 router.put('/:pid', async (req, res) => {
-    const productId = parseInt(req.params.pid)
-    
-    const updatedProduct = req.body;
-    await productManager.updateProduct(productId, updatedProduct);
-    res.json({ message: "Videojuego actualizado" });
+    let pid = parseInt(req.params.pid);
+
+    try {
+        const { title, description, code, price, stock, category, thumbnails, status } = req.body;
+        const response = await productManager.updateProduct(pid, { title, description, code, price, stock, category, thumbnails, status });
+        res.json(response);
+    } catch (error) {
+        console.log(error)
+        res.send("Error al editar el producto")
+    }
 });
 
   // DELETE
 router.delete('/:pid', async (req, res) => {
-    const productId = parseInt(req.params.pid);
-    await productManager.deleteProduct(productId);
-    res.json({ message: "Videojuego eliminado"});
-    
-    const products = await productManager.getProducts();
-    res.send(products);
+    let pid = parseInt(req.params.pid);
+    console.log("Valor de pid:", pid);
+    try {
+        await productManager.deleteProduct(pid)
+        res.send("Producto eliminado correctamente")
+    } catch (error) {
+        console.log(error)
+        res.send(`Error al intentar eliminar el producto con id ${pid}`)
+    }
 });
 
 module.exports = router;
