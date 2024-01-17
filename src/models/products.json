@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "title": "Imperio AO",
     "description": "elije tu clase de avatar y a la aventura",
     "price": 3000,
@@ -9,7 +9,7 @@
     "stock": 20
   },
   {
-    "id": "2",
+    "id": 2,
     "title": "Minecraft",
     "description": "Vive aventuras en un mundo cuadrado",
     "price": 5000,
@@ -18,7 +18,7 @@
     "stock": 25
   },
   {
-    "id": "3",
+    "id": 3,
     "title": "Spiderman",
     "description": "Aventura por los edificion de Nueva York",
     "price": 4000,
@@ -27,7 +27,7 @@
     "stock": 20
   },
   {
-    "id": "4",
+    "id": 4,
     "title": "Sword art online",
     "description": "Vive una aventura en diferentes ecenarios",
     "price": 9000,
@@ -36,7 +36,7 @@
     "stock": 20
   },
   {
-    "id": "5",
+    "id": 5,
     "title": "Lego Batman",
     "description": "Vuelvete el caballero de la noche en  el mundo lego",
     "price": 3000,
@@ -45,7 +45,7 @@
     "stock": 35
   },
   {
-    "id": "6",
+    "id": 6,
     "title": "Jumanji",
     "description": "Una aventura en la selva",
     "price": 5000,
@@ -54,7 +54,7 @@
     "stock": 15
   },
   {
-    "id": "7",
+    "id": 7,
     "title": "Brawhalla",
     "description": "A cagarse a palos con divercion",
     "price": 2500,
@@ -63,7 +63,7 @@
     "stock": 15
   },
   {
-    "id": "8",
+    "id": 8,
     "title": "Fornite",
     "description": "Divierete con tus amigo, callendo del cielo",
     "price": 10000,
@@ -72,7 +72,7 @@
     "stock": 28
   },
   {
-    "id": "9",
+    "id": 9,
     "title": "Harry Potter",
     "description": "Aprende magia",
     "price": 4000,
@@ -81,7 +81,7 @@
     "stock": 20
   },
   {
-    "id": "10",
+    "id": 10,
     "title": "Indiana Jones",
     "description": "Vive una aventura con el arquiologo mas famoso el mundo",
     "price": 2000,

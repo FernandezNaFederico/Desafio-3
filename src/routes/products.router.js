@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 });
 
 
-router.get('/products/:pid', async (req, res) => {
+router.get('/game/:pid', async (req, res) => {
     try {
         let pid = parseInt(req.params.pid);
         const sought = await productManager.getProductsById(pid);

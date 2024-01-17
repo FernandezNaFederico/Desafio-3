@@ -12,6 +12,7 @@ class ProductManager {
 
     async addProduct(newObject) {
         let {title, description, price, thumbnail,code, stock, category = [], status = true} = newObject;
+        let existingProducts = await this.readFile();
 
         if(!title || !description || !code || !category)
         {
@@ -24,12 +25,10 @@ class ProductManager {
             return;
         }
 
-        if(this.products.some(item => item.code === code)){
+        if(existingProducts.some(item => item.code === code)){
             console.log("Que sea un codigo unico por favor");
             return;
         }
-
-        let existingProducts = await this.readFile();
 
         const newProduct = {
             id: existingProducts.length > 0 ? Math.max(...existingProducts.map(p => p.id)) + 1 : 1,
@@ -106,7 +105,7 @@ class ProductManager {
 
             if(index !== -1) {
 
-                const gameReplaced = { ...arrayProds[index], ...productUpdated }
+                const gameReplaced = { ...arrayGame[index], ...productUpdated }
                 arrayGame.splice(index, 1, gameReplaced);
                 await this.saveFile(arrayGame);
                 console.log("Juego Actualizado Correctamente")
