@@ -17,12 +17,12 @@ class ProductManager {
         if(!title || !description || !code || !category)
         {
             console.log("Todos los campos son requeridos, compltalos o hasta la vista beibi");
-            return;
+            return { status: 400, msg: "Error: Te faltó uno de los campos de texto, recordá que todos son obligatorios (title, description, code, category)" };
         }
 
         if (typeof price !== 'number' || typeof stock !== 'number') {
             console.log("Poner el precio y el stock en valores numerico por favor");
-            return;
+            return { status: 400, msg: "Error: Recuerda que precio y stock son valores numericos." };
         }
 
         if(existingProducts.some(item => item.code === code)){
@@ -66,6 +66,7 @@ class ProductManager {
 
             if(!searching) {
                 console.log("Producto no encontrado");
+                return null;
             }else {
                 console.log("Yes, lo encontramos!");
                 return searching;

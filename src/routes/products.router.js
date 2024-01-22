@@ -44,8 +44,9 @@ router.get('/game/:pid', async (req, res) => {
 // POST
 router.post('/', async (req, res) => {
     try {
-        const { title, description, price,category, thumbnail, code, stock } = req.body;
-        const response = await productManager.addProduct({ title, description,category, price, thumbnail, code, stock });
+        const { title, description, price,category, thumbnail, code, stock, status } = req.body;
+
+        const response = await productManager.addProduct({ title, description,category, price, thumbnail, code, stock, status });
         res.json(response);
     } catch (error) {
         console.log(error)
@@ -56,6 +57,7 @@ router.post('/', async (req, res) => {
   // PUT
 router.put('/:pid', async (req, res) => {
     let pid = parseInt(req.params.pid);
+    const prod = await productManager.getProductsById(pid);
 
     try {
         const { title, description, code, price, stock, category, thumbnails, status } = req.body;
